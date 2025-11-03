@@ -51,19 +51,19 @@ const selectorOptions: SelectorOption[] = [
   {
     id: 'class',
     label: '.highlight',
-    description: '선택한 클래스 이름을 가진 모든 요소를 찾습니다.',
+    description: '선택한 클래스(class) 이름을 가진 모든 요소(element)를 찾습니다.',
     matches: (element) => element.classes?.includes('highlight') ?? false
   },
   {
     id: 'id',
     label: '#special-task',
-    description: '특정 id 값을 가진 단 하나의 요소를 선택합니다.',
+    description: '특정 아이디(id) 속성(attribute) 값을 가진 단 하나의 요소(element)를 선택합니다.',
     matches: (element) => element.idAttr === 'special-task'
   },
   {
     id: 'pseudo',
     label: 'li:first-child',
-    description: '리스트에서 첫 번째 <li> 요소와 일치합니다.',
+    description: '리스트(list)에서 첫 번째 <li> 요소(element)와 일치합니다.',
     matches: (element) => element.tag === 'li' && element.order === 1
   }
 ];
@@ -71,7 +71,7 @@ const selectorOptions: SelectorOption[] = [
 const CssSelectorsExample = () => {
   const [activeSelector, setActiveSelector] = useState<string>('class');
   const [logs, setLogs] = useState<string[]>([
-    '👋 Select a CSS selector to see which elements it targets.'
+    '👋 CSS 선택자(selector)를 선택해서 어떤 요소(element)가 선택되는지 확인하세요.'
   ]);
 
   const pushLog = (messages: string | string[]) => {
@@ -95,19 +95,19 @@ const CssSelectorsExample = () => {
     const matchLabels = matches.map((match) => match.label.replace(/<|>/g, ''));
 
     pushLog([
-      `🎯 Using selector "${option.label}"`,
+      `🎯 "${option.label}" 선택자(selector)를 사용했습니다.`,
       matches.length > 0
-        ? `✅ Matched ${matches.length} element(s): ${matchLabels.join(', ')}`
-        : '⚠️ No elements matched this selector.'
+        ? `✅ ${matches.length}개의 요소(element)가 일치: ${matchLabels.join(', ')}`
+        : '⚠️ 이 선택자(selector)에 일치하는 요소(element)가 없습니다.'
     ]);
   };
 
   return (
     <div className="flex h-full flex-col space-y-4">
       <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-slate-100">Try CSS selectors</h2>
+        <h2 className="text-lg font-semibold text-slate-100">CSS 선택자(selector) 실습하기</h2>
         <p className="text-sm text-slate-400">
-          Choose a selector to highlight which elements in the sample markup would be selected.
+          선택자(selector)를 골라서 예제 마크업(markup)의 어떤 요소(element)가 선택되는지 확인하세요.
         </p>
         <div className="flex flex-wrap gap-2">
           {selectorOptions.map((option) => (
@@ -130,7 +130,7 @@ const CssSelectorsExample = () => {
       </div>
 
       <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Sample markup</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">샘플 마크업(markup)</p>
         <div className="mt-3 space-y-2">
           {sampleElements.map((element) => {
             const isMatched = matchedElements.some((match) => match.id === element.id);
