@@ -28,20 +28,33 @@ const MarkdownView = ({ content }: MarkdownViewProps) => {
                 >
                   {({ className: highlightClassName, style, tokens, getLineProps, getTokenProps }) => (
                     <pre className={`${highlightClassName} rounded-lg`} style={style}>
-                      {tokens.map((line, lineIndex) => (
-                        <div key={lineIndex} {...getLineProps({ line, key: lineIndex })}>
-                          {line.map((token, tokenIndex) => (
-                            <span key={tokenIndex} {...getTokenProps({ token, key: tokenIndex })} />
-                          ))}
-                        </div>
-                      ))}
+                      {tokens.map((line, lineIndex) => {
+                        const lineProps = getLineProps({ line, key: lineIndex });
+                        const { key: lineKey, ...restLineProps } = lineProps as typeof lineProps & {
+                          key?: string | number;
+                        };
+                        return (
+                          <div key={lineKey ?? lineIndex} {...restLineProps}>
+                            {line.map((token, tokenIndex) => {
+                              const tokenProps = getTokenProps({ token, key: tokenIndex });
+                              const { key: tokenKey, ...restTokenProps } = tokenProps as typeof tokenProps & {
+                                key?: string | number;
+                              };
+                              return <span key={tokenKey ?? tokenIndex} {...restTokenProps} />;
+                            })}
+                          </div>
+                        );
+                      })}
                     </pre>
                   )}
                 </Highlight>
               );
             }
+            const inlineClassName = [className, 'rounded bg-slate-800 px-1 py-0.5 text-sm']
+              .filter(Boolean)
+              .join(' ');
             return (
-              <code {...props} className="rounded bg-slate-800 px-1 py-0.5 text-sm">
+              <code {...props} className={inlineClassName}>
                 {children}
               </code>
             );
