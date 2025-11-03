@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'prism-react-renderer';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/nightOwl';
 
 type MarkdownViewProps = {
@@ -16,15 +16,28 @@ const MarkdownView = ({ content }: MarkdownViewProps) => {
           code({ inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             if (!inline && match) {
+              const language = match[1] as Language;
+              const code = String(children).replace(/\n$/, '');
               return (
-                <SyntaxHighlighter
+                <Highlight
+                  {...defaultProps}
                   {...props}
-                  style={theme as unknown as Record<string, never>}
-                  language={match[1]}
-                  PreTag="div"
+                  theme={theme}
+                  code={code}
+                  language={language}
                 >
-                  {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
+                  {({ className: highlightClassName, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre className={`${highlightClassName} rounded-lg`} style={style}>
+                      {tokens.map((line, lineIndex) => (
+                        <div key={lineIndex} {...getLineProps({ line, key: lineIndex })}>
+                          {line.map((token, tokenIndex) => (
+                            <span key={tokenIndex} {...getTokenProps({ token, key: tokenIndex })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
               );
             }
             return (
