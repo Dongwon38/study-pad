@@ -8,7 +8,8 @@ const topicPages = {
     tags: lazy(() => import('./topics/html/tags/Page'))
   },
   css: {
-    selectors: lazy(() => import('./topics/css/selectors/Page'))
+    selectors: lazy(() => import('./topics/css/selectors/Page')),
+    flexbox: lazy(() => import('./topics/css/flexbox/Page'))
   },
   js: {
     promise: lazy(() => import('./topics/js/promise/Page'))

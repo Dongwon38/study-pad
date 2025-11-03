@@ -21,6 +21,12 @@
           "label": "Selectors",
           "description": "Targeting elements with CSS.",
           "available": true
+        },
+        {
+          "id": "flexbox",
+          "label": "Flexbox Core",
+          "description": "Recap axis control and flex growth strategies.",
+          "available": true
         }
       ]
     },
