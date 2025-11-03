@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": "html",
+      "label": "HTML",
+      "topics": [
+        {
+          "id": "tags",
+          "label": "HTML Tags",
+          "description": "Understand basic HTML elements.",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "label": "CSS",
+      "topics": [
+        {
+          "id": "selectors",
+          "label": "Selectors",
+          "description": "Targeting elements with CSS.",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "label": "JavaScript",
+      "topics": [
+        {
+          "id": "promise",
+          "label": "Working with Promises",
+          "description": "Manage async workflows with promises.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "label": "React",
+      "topics": [
+        {
+          "id": "state",
+          "label": "Managing State",
+          "description": "Learn the basics of state with hooks.",
+          "available": false
+        }
+      ]
+    }
+  ]
+}
